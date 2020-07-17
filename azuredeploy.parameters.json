@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "existingDataFactoryName": {
+      "value":"pgsdwh"
+    },
+    "existingDataFactoryResourceGroup": {
+      "value":"pgsdwh"
+    },
+    "existingDataFactoryVersion": {
+      "value":"V2"
+    },
+    "IntegrationRuntimeName": {
+      "value":"Dev-InnioIntegrationRuntime"
+    },
+    "NodeCount":{
+      "value": 1
+    },
+	"vmSize": {
+	  "value": "Standard_F2"
+	},
+    "adminUserName": {
+      "value": "InnioAdmin"
+    },
+    "adminPassword": {
+      "value": ""
+    },
+    "existingVirtualNetworkName":{
+      "value": "vnet-common-dev-germanywc"
+    },
+    "existingVnetResourceGroupName":{
+      "value": "rg-vnet-common-dev-germanywc"
+    },
+    "existingSubnetInYourVnet": {
+      "value": "snet-dwh-dev-germanywc-int"
+    },
+    "existingVnetLocation": {
+      "value": "Germany West Central"
+    },
+	"_artifactsLocation": {
+	  "value": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-vms-with-selfhost-integration-runtime/"
+	}
+  }
+}
