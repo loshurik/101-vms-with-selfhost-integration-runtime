@@ -29,16 +29,16 @@
   },
   "variables": {
     "nicName": "[concat(parameters('virtualMachineName'), 'Nic')]",
-    "publicIPAddressName": "[concat(parameters('virtualMachineName'), '-ip')]"
+    "privateIPAddressName": "[concat(parameters('virtualMachineName'), '-ip')]"
   },
   "resources": [
     {
       "apiVersion": "2019-09-01",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[variables('publicIPAddressName')]",
+      "type": "Microsoft.Network/privateIPAddresses",
+      "name": "[variables('privateIPAddressName')]",
       "location": "[parameters('existingVnetLocation')]",
       "properties": {
-        "publicIPAllocationMethod": "Dynamic"
+        "privateIPAllocationMethod": "Dynamic"
       }
     },
     {
@@ -47,7 +47,7 @@
       "name": "[variables('nicName')]",
       "location": "[parameters('existingVnetLocation')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))]"
+        "[resourceId('Microsoft.Network/privateIPAddresses', variables('privateIPAddressName'))]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -55,8 +55,8 @@
             "name": "ipconfig1",
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
-              "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
+              "privateIPAddress": {
+                "id": "[resourceId('Microsoft.Network/privateIPAddresses',variables('privateIPAddressName'))]"
               },
               "subnet": {
                 "id": "[parameters('subnetId')]"
