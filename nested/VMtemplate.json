@@ -28,36 +28,20 @@
     }
   },
   "variables": {
-    "nicName": "[concat(parameters('virtualMachineName'), 'Nic')]",
-    "privateIPAddressName": "[concat(parameters('virtualMachineName'), '-ip')]"
+    "nicName": "[concat(parameters('virtualMachineName'), 'Nic')]"
   },
   "resources": [
-    {
-      "apiVersion": "2019-09-01",
-      "type": "Microsoft.Network/privateIPAddresses",
-      "name": "[variables('privateIPAddressName')]",
-      "location": "[parameters('existingVnetLocation')]",
-      "properties": {
-        "privateIPAllocationMethod": "Dynamic"
-      }
-    },
     {
       "apiVersion": "2019-09-01",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('nicName')]",
       "location": "[parameters('existingVnetLocation')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/privateIPAddresses', variables('privateIPAddressName'))]"
-      ],
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
-              "privateIPAddress": {
-                "id": "[resourceId('Microsoft.Network/privateIPAddresses',variables('privateIPAddressName'))]"
-              },
               "subnet": {
                 "id": "[parameters('subnetId')]"
               }
